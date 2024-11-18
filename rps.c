@@ -5,9 +5,12 @@ int computerLogic();
 void game();
 int checkWin(int, int);
 
-void game() {
+void main() {
+
+	srand(time(0));
+    
 	int playAgain = 1;
-	int games = 1;
+	int games = 0;
 
 	int scores[2] = {0};
 
@@ -50,23 +53,26 @@ void game() {
 				break;
 		}
 
-		printf("Go again? Yes = 1, No = 2");
+		printf("Go again? Yes = 1, No = 2: ");
 		scanf("%d", &playAgain);
 		games++; 
 	}
 
 	printf("You have played %d games\n", games);
 	printf("The total score was:\n");
-	printf("Player: %d, Computer: %d", scores[0], scores[1]); 
+	printf("Player: %d, Computer: %d\n", scores[0], scores[1]); 
 
-    if (scores[0] > scores[1]) {
+    int player_percentage = (scores[0] * 100) / games ;
+	int computer_percentage = (scores[1] * 100) / games;
+
+	if (scores[0] > scores[1]) {
 		printf("You won %d%% of the games, making you the overall winner!\n",
-			   (scores[0] / games) * 100);
+			   player_percentage);
 	}
-    if (scores[1] > scores[0]) {
+    else if (scores[1] > scores[0]) {
 		printf("The computer won %d%% of the games, making it the overall "
 			   "winner. You lost\n",
-			   (scores[1] / games) * 100);
+			   computer_percentage);
 	}
     else {
 		printf("The game ends with an overall tie.\n");
@@ -83,16 +89,13 @@ int computerLogic() {
 }
 
 int checkWin(int playerChoice, int computerChoice) {
-
-    if (playerChoice > computerChoice) {
-			return 1;
+	if (playerChoice == computerChoice) {
+		return 0; // It's a tie
 	}
-    
-    if (playerChoice < computerChoice) {
-		return 2;
+	if ((playerChoice == 1 && computerChoice == 3) || // Rock beats Scissors
+		(playerChoice == 2 && computerChoice == 1) || // Paper beats Rock
+		(playerChoice == 3 && computerChoice == 2)) { // Scissors beats Paper
+		return 1;									  // Player wins
 	}
-
-    else {
-		return 0; 
-	}
+	return 2; // Computer wins
 }
