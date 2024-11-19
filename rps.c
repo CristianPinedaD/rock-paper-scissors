@@ -7,13 +7,14 @@ int checkWin(int, int);
 
 void main() {
 
-	srand(time(0));
+	srand(time(0)); // Generates a random seed every time you run.
     
 	int playAgain = 1;
-	int games = 0;
+	int games = 0; 
 
-	int scores[2] = {0};
+	int scores[2] = {0}; // Score array (scores[0] is player score, scores[1] is computer score)
 
+	// Game loop
 	while (playAgain == 1) {
 		int playerChoice;
 
@@ -35,9 +36,9 @@ void main() {
 				exit(0); 
 		}
 
-		int computerChoice = computerLogic();
+		int computerChoice = computerLogic(); // Calculates computer's choice for this round.
 
-		int winner = checkWin(playerChoice, computerChoice);
+		int winner = checkWin(playerChoice, computerChoice); // Determines the winner for the round.
 
         switch (winner) {
             case 0:
@@ -45,25 +46,27 @@ void main() {
 				break;
             case 1:
 				puts("You win!");
-				scores[0]++;
+				scores[0]++; // Updates global player score.
 				break;
             case 2:
-				puts("You lose");
-				scores[1]++;
+				puts("You lose.");
+				scores[1]++; // Updates global computer score.
 				break;
 		}
 
-		printf("Go again? Yes = 1, No = 2: ");
+		printf("Go again? Yes = 1, No = 2: "); // Gives the player an option to try again.
 		scanf("%d", &playAgain);
-		games++; 
+		games++;  // Updates total games.
 	}
 
+
+	// End state.
 	printf("You have played %d games\n", games);
 	printf("The total score was:\n");
 	printf("Player: %d, Computer: %d\n", scores[0], scores[1]); 
 
-    int player_percentage = (scores[0] * 100) / games ;
-	int computer_percentage = (scores[1] * 100) / games;
+    int player_percentage = (scores[0] * 100) / games ; // Just for the player to know.
+	int computer_percentage = (scores[1] * 100) / games; // In case the computer won more times than the player.
 
 	if (scores[0] > scores[1]) {
 		printf("You won %d%% of the games, making you the overall winner!\n",
@@ -80,10 +83,10 @@ void main() {
 }
 
 int computerLogic() {
-	int upperbound = 3;
-	int lowerbound = 1;
+	int upperbound = 3; // Upper bound for random number calculation.
+	int lowerbound = 1; // Lower bound for random number calculation.
 
-	int value = rand() % (upperbound - lowerbound + 1) + lowerbound;
+	int value = rand() % (upperbound - lowerbound + 1) + lowerbound; // Calculates a random number between 1 and 3 (inclusive).
 
 	return value; 
 }
