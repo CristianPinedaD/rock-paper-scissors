@@ -4,6 +4,8 @@
 int computerLogic();
 void game();
 int checkWin(int, int);
+void pressAnyKeyToContinue();
+void clearScreen();
 
 void main() {
 
@@ -36,6 +38,9 @@ void main() {
 				exit(0); 
 		}
 
+		puts ("Computer is making a choice...");
+		pressAnyKeyToContinue(); // Waits for the player to press any key to continue.
+
 		int computerChoice = computerLogic(); // Calculates computer's choice for this round.
 
 		switch (computerChoice) {
@@ -49,6 +54,10 @@ void main() {
 				puts("Computer chose scissors");
 				break;
 		}
+
+		puts("Calculating winner...");
+
+		pressAnyKeyToContinue(); // Waits for the player to press any key to continue.
 
 		int winner = checkWin(playerChoice, computerChoice); // Determines the winner for the round.
 
@@ -66,9 +75,13 @@ void main() {
 				break;
 		}
 
+		pressAnyKeyToContinue(); // Waits for the player to press any key to continue.
+
 		printf("Go again? Yes = 1, No = 2: "); // Gives the player an option to try again.
 		scanf("%d", &playAgain);
-		games++;  // Updates total games.
+		games++;  // Updates total games.'
+		pressAnyKeyToContinue(); // Waits for the player to press any key to continue.
+		clearScreen(); // Clears the screen for the next round.
 	}
 
 
@@ -113,4 +126,15 @@ int checkWin(int playerChoice, int computerChoice) {
 		return 1;									  // Player wins
 	}
 	return 2; // Computer wins
+}
+
+
+void pressAnyKeyToContinue() {
+	printf("Press any key to continue\n");
+	getchar();
+	getchar();
+}
+
+void clearScreen() {
+	system("clear");
 }
