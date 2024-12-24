@@ -38,6 +38,18 @@ void main() {
 
 		int computerChoice = computerLogic(); // Calculates computer's choice for this round.
 
+		switch (computerChoice) {
+			case 1:
+				puts("Computer chose rock");
+				break;
+			case 2: 
+				puts("Computer chose paper");
+				break;
+			case 3:
+				puts("Computer chose scissors");
+				break;
+		}
+
 		int winner = checkWin(playerChoice, computerChoice); // Determines the winner for the round.
 
         switch (winner) {
